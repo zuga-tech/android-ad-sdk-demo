@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">BainuAdSdk</string>
+    <string name="app_name">BainuAdSdkDev</string>
+
+    <string name="title_activity_laucher_ad">LaucherAdActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

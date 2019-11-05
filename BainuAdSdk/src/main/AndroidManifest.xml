@@ -1,2 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="zuga.com.bainuadsdk" />
+    package="com.zuga.ad.sdk">
+
+    <application>
+        <activity
+            android:name="zuga.com.bainu.ad.sdk.activity.LauncherAdActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_laucher_ad"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme" />
+    </application>
+</manifest>

@@ -3,18 +3,17 @@ import groovy.json.JsonSlurper
 def configJson = [:]
 JsonSlurper json = new JsonSlurper()
 try {
-    configJson = json.parse(new File("./Config.json"))
+    def file = new File("${getSettingsDir()}/Config.json")
+    configJson = json.parse(file)
 } catch (Exception ignored) {
-    // ignore
+// ignore
 }
 def useSource = configJson["useSource"] == null ? false : configJson["useSource"]
 
 
 println("settings use source: ${useSource}")
 if (useSource) {
-    include ':bainuadsdkdev', ':BainuAdSdk'
-} else {
-    include ':BainuAdSdk'
+    include ':bainuadsdkdev'
 }
-include ':app', ':bainuadsdkdev-release'
+include ':app', ':BainuAdSdk'
 rootProject.name = 'BainuAd'

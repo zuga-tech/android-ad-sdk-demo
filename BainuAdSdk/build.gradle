@@ -1,3 +1,16 @@
+import groovy.json.JsonSlurper
+
+def configJson = [:]
+JsonSlurper json = new JsonSlurper()
+try {
+    println("sdk path:" + projectDir.getAbsolutePath())
+    def file = new File("${projectDir.getAbsolutePath()}/../Config.json")
+    configJson = json.parse(file)
+} catch (Exception ignored) {
+    // ignore
+}
+def useSource = configJson["useSource"] == null ? false : configJson['useSource']
+println("bainu ad sdk use source: " + useSource)
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
@@ -28,5 +41,11 @@ android {
 }
 
 dependencies {
-    implementation files('libs/bainuadsdkdev-release.aar@aar')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.ads:ads-identifier:1.0.0-alpha02'
+    if (useSource) {
+        api project(':bainuadsdkdev')
+    } else {
+        api files('libs/BainuAdSdk.jar')
+    }
 }
