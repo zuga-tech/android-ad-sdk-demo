@@ -26,6 +26,9 @@ import zuga.com.bainu.ad.sdk.listener.AdListener;
 import zuga.com.bainu.ad.sdk.listener.NativeAdListener;
 import zuga.com.bainu.ad.sdk.view.NativeAdView;
 
+/**
+ * @author saqrag
+ */
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -127,8 +130,7 @@ public class MainActivity extends AppCompatActivity {
                             nativeAdView.getAdvertiserView();
                             ((MongolTextView) nativeAdView.getBodyView()).setText(nativeAd.getBody());
                             nativeAdView.getLayoutParams().width = RecyclerView.LayoutParams.WRAP_CONTENT;
-                            // todo change this MEDIA_TYPE_IMAGE
-                            if (nativeAd.getMediaType() == UnifiedNativeAd.MEDIA_TYPE_VIDEO) {
+                            if (nativeAd.getMediaType() == UnifiedNativeAd.MEDIA_TYPE_IMAGE) {
                                 Glide.with(nativeAdView).load(nativeAd.getMedia()).into((ImageView) nativeAdView.getMediaView().getImageView());
                                 nativeAdView.getMediaView().getImageView().setVisibility(View.VISIBLE);
                                 nativeAdView.getMediaView().getVideoView().setVisibility(View.GONE);

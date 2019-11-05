@@ -1,7 +1,5 @@
 import groovy.json.JsonSlurper
 
-def useSource = false
-
 def configJson = [:]
 JsonSlurper json = new JsonSlurper()
 try {
@@ -9,12 +7,12 @@ try {
 } catch (Exception ignored) {
     // ignore
 }
-useSource = configJson["useSource"] == null ? false : configJson["useSource"]
+def useSource = configJson["useSource"] == null ? false : configJson["useSource"]
 
 
 println("settings use source: ${useSource}")
 if (useSource) {
-    include ':bainuadsdkdev'
+    include ':bainuadsdkdev', ':BainuAdSdk'
 } else {
     include ':BainuAdSdk'
 }
