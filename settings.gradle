@@ -16,5 +16,5 @@ if (useSource) {
 } else {
     include ':BainuAdSdk'
 }
-include ':app'
+include ':app', ':bainuadsdkdev-release'
 rootProject.name = 'BainuAd'

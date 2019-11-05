@@ -47,10 +47,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(path: ':bainuadsdkdev-release')
     if (useSource) {
         implementation project(':bainuadsdkdev')
     } else {
-        implementation project(':BainuAdSdk')
-//        implementation "com.github.zuga-tech:android-ad-sdk-demo:14d95aea58"
+//        implementation project(':BainuAdSdk')
+//        implementation 'com.github.zuga-tech:BainuAdSdk:c9687fb5ea@aar'
     }
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black_overlay">#66000000</color>
+    <string name="app_name">BainuAdSdkDev</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_laucher_ad">LaucherAdActivity</string>
+    <style name="FullscreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr format="reference" name="metaButtonBarStyle"/>
+        <attr format="reference" name="metaButtonBarButtonStyle"/>
+    </declare-styleable>
+</resources>

@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group = 'com.github.zuga'
+group = 'com.github.zuga-tech'
 
 android {
     compileSdkVersion 29
@@ -28,5 +28,5 @@ android {
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation files('libs/bainuadsdkdev-release.aar@aar')
 }
