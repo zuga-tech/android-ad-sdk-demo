@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onAdShow() {
                     }
                 }).build().load();
-//        initData();
+        initData();
     }
 
     private void initData() {
