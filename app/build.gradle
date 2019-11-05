@@ -51,5 +51,6 @@ dependencies {
         implementation project(':bainuadsdkdev')
     } else {
         implementation project(':BainuAdSdk')
+//        implementation "com.github.zuga-tech:android-ad-sdk-demo:14d95aea58"
     }
 }
