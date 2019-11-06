@@ -1,4 +1,17 @@
+import groovy.json.JsonSlurper
+
 apply plugin: 'com.android.application'
+def configJson = [:]
+JsonSlurper json = new JsonSlurper()
+try {
+    println("sdk path:" + projectDir.getAbsolutePath())
+    def file = new File("${projectDir.getAbsolutePath()}/../Config.json")
+    configJson = json.parse(file)
+} catch (Exception ignored) {
+    // ignore
+}
+def useSource = configJson["useSource"] == null ? false : configJson['useSource']
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -28,6 +41,10 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'net.studymongolian:mongol-library:2.1.0'
     implementation 'com.github.bumptech.glide:glide:4.10.0'
-    implementation project(':BainuAdSdk')
+    if (useSource) {
+        implementation project(':bainuadsdkdev')
+    } else {
+        implementation project(':BainuAdSdk')
 //    implementation 'com.github.zuga-tech:android-ad-sdk-demo:4c501dfd74'
+    }
 }
