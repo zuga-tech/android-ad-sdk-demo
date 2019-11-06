@@ -29,4 +29,5 @@ dependencies {
     implementation 'net.studymongolian:mongol-library:2.1.0'
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     implementation project(':BainuAdSdk')
+//    implementation 'com.github.zuga-tech:android-ad-sdk-demo:4c501dfd74'
 }

@@ -16,6 +16,7 @@
         android:id="@+id/launcher_video"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:visibility="gone" />
 
 
@@ -29,4 +30,17 @@
         android:background="@drawable/icon_ad_close"
         android:visibility="gone"
         tools:ignore="ContentDescription,RtlHardcoded" />
+
+    <!--    todo use this image-->
+    <ImageButton
+        android:id="@+id/ib_volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|top|right"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="84dp"
+        android:background="@drawable/icon_ad_close"
+        android:visibility="gone"
+        tools:ignore="ContentDescription,RtlHardcoded" />
+
 </FrameLayout>
