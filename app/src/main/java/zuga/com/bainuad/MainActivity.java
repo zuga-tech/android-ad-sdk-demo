@@ -1,6 +1,7 @@
 package zuga.com.bainuad;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<Timeline> timelines;
+    private final static String TAG = "MainActivityLog";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,15 +166,6 @@ public class MainActivity extends AppCompatActivity {
                     return viewTypeAd;
                 }
             }
-
-            @Override
-            public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
-                Timeline timeline = timelines.get(holder.getAdapterPosition());
-                if (timeline.type == Timeline.TYPE_AD) {
-                    UnifiedNativeAd content = timeline.getContent(UnifiedNativeAd.class);
-                    content.destroy();
-                }
-            }
         };
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(adapter);
@@ -195,23 +188,28 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onMediaViewClick(View mediaView) {
+                        Log.d(TAG, "onMediaViewClick");
                     }
                 })
                 .withAdListener(new AdListener() {
                     @Override
                     public void onAdClicked() {
+                        Log.d(TAG, "onAdClicked");
                     }
 
                     @Override
                     public void onAdClosed() {
+                        Log.d(TAG, "onAdClosed");
                     }
 
                     @Override
                     public void onAdFailedToLoad(int errorCode) {
+                        Log.d(TAG, "onAdFailedToLoad" + errorCode);
                     }
 
                     @Override
                     public void onAdShow() {
+                        Log.d(TAG, "onAdShow");
                     }
                 }).build().load();
     }
@@ -219,6 +217,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        for (Timeline timeline : timelines) {
+            if (timeline.type == Timeline.TYPE_AD) {
+                UnifiedNativeAd content = timeline.getContent(UnifiedNativeAd.class);
+                if (content != null) {
+                    content.destroy();
+                }
+            }
+        }
     }
 
     private class Timeline {
