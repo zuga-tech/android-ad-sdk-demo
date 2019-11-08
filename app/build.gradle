@@ -11,7 +11,7 @@ try {
     // ignore
 }
 def useSource = configJson["useSource"] == null ? false : configJson['useSource']
-
+println("app use source: " + useSource)
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -45,6 +45,5 @@ dependencies {
         implementation project(':bainuadsdkdev')
     } else {
         implementation project(':BainuAdSdk')
-//    implementation 'com.github.zuga-tech:android-ad-sdk-demo:4c501dfd74'
     }
 }

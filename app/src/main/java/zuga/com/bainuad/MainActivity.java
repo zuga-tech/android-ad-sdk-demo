@@ -127,9 +127,7 @@ public class MainActivity extends AppCompatActivity {
                             nativeAdView.requestLayout();
                         } else {
                             Glide.with(nativeAdView).load(nativeAd.getIcon()).into((ImageView) nativeAdView.getIconView());
-                            ((MongolTextView) nativeAdView.getHeaderLineView()).setText(nativeAd.getHeadline());
-                            //noinspection ResultOfMethodCallIgnored
-                            nativeAdView.getAdvertiserView();
+                            ((MongolTextView) nativeAdView.getHeaderLineView()).setText(nativeAd.getAdvertiser());
                             ((MongolTextView) nativeAdView.getBodyView()).setText(nativeAd.getBody());
                             nativeAdView.getLayoutParams().width = RecyclerView.LayoutParams.WRAP_CONTENT;
                             if (nativeAd.getMediaType() == UnifiedNativeAd.MEDIA_TYPE_IMAGE) {
@@ -187,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onMediaViewClick(View mediaView) {
+                    public void onMediaViewClick(View mediaView, UnifiedNativeAd nativeAd) {
                         Log.d(TAG, "onMediaViewClick");
                     }
                 })
