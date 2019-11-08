@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     case viewTypeAd:
                         NativeAdView nativeAdView = (NativeAdView) LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_native_ad, parent, false);
                         nativeAdView.setIconView(nativeAdView.findViewById(R.id.iv_header))
-                                .setHeaderLineView(nativeAdView.findViewById(R.id.tv_header))
+                                .setCallToActionView(nativeAdView.findViewById(R.id.tv_header))
                                 .setAdvertiserView(null)
                                 .setBodyView(nativeAdView.findViewById(R.id.tv_body))
                                 .setMediaView(nativeAdView.findViewById(R.id.mv_media));
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                             nativeAdView.requestLayout();
                         } else {
                             Glide.with(nativeAdView).load(nativeAd.getIcon()).into((ImageView) nativeAdView.getIconView());
-                            ((MongolTextView) nativeAdView.getHeaderLineView()).setText(nativeAd.getAdvertiser());
+                            ((MongolTextView) nativeAdView.getCallToActionView()).setText(nativeAd.getAdvertiser());
                             ((MongolTextView) nativeAdView.getBodyView()).setText(nativeAd.getBody());
                             nativeAdView.getLayoutParams().width = RecyclerView.LayoutParams.WRAP_CONTENT;
                             if (nativeAd.getMediaType() == UnifiedNativeAd.MEDIA_TYPE_IMAGE) {
