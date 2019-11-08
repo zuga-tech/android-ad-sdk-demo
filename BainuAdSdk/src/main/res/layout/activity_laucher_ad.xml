@@ -27,19 +27,20 @@
         android:layout_gravity="end|top|right"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/icon_ad_close"
+        android:background="@null"
+        android:src="@drawable/icon_ad_close"
         android:visibility="gone"
         tools:ignore="ContentDescription,RtlHardcoded" />
 
-    <!--    todo use this image-->
     <ImageButton
         android:id="@+id/ib_volume"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|top|right"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="84dp"
-        android:background="@drawable/icon_ad_close"
+        android:layout_marginEnd="70dp"
+        android:background="@null"
+        android:src="@drawable/bainu_ad_selector_mute"
         android:visibility="gone"
         tools:ignore="ContentDescription,RtlHardcoded" />
 

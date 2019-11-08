@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             if (i % 5 == 0) {
                 String adPositionId = "nativeAdId:" + i;
                 timelines.add(new Timeline(Timeline.TYPE_AD, adPositionId, null));
-                requestAd(adPositionId);
+                requestAd(i, adPositionId);
             } else {
                 timelines.add(new Timeline(Timeline.TYPE_STRING, null, "   " + i));
             }
@@ -169,19 +169,18 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void requestAd(String adPositionId) {
+    private void requestAd(int position, String adPositionId) {
         AdLoader.forNativeAd(this)
                 .setAdPositionId(adPositionId)
                 .withNativeAdListener(new NativeAdListener() {
                     @Override
                     public void onNativeAdLoaded(UnifiedNativeAd nativeAd) {
-                        for (Timeline timeline : timelines) {
-                            if (adPositionId.equals(timeline.id)) {
-                                timeline.content = nativeAd;
-                                break;
-                            }
-
+                        Timeline timeline = timelines.get(position);
+                        UnifiedNativeAd content = timeline.getContent(UnifiedNativeAd.class);
+                        if (content != null) {
+                            content.destroy();
                         }
+                        timeline.content = nativeAd;
                     }
 
                     @Override
@@ -226,19 +225,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class Timeline {
-        public final static int TYPE_AD = 1;
-        public final static int TYPE_STRING = 2;
+        final static int TYPE_AD = 1;
+        final static int TYPE_STRING = 2;
         int type;
         String id;
         Object content;
 
-        public Timeline(int type, String id, Object content) {
+        Timeline(int type, String id, Object content) {
             this.type = type;
             this.id = id;
             this.content = content;
         }
 
-        public <B> B getContent(Class<B> clazz) {
+        <B> B getContent(Class<B> clazz) {
             boolean instance = clazz.isInstance(content);
             if (instance) {
                 return clazz.cast(content);
