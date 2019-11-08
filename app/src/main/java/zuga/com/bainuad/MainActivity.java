@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 .setSilenceTime(10000)
                 .withAdListener(new AdListener() {
                     @Override
-                    public void onAdClicked() {
+                    public void onAdClicked(String url) {
                     }
 
                     @Override
@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .withAdListener(new AdListener() {
                     @Override
-                    public void onAdClicked() {
+                    public void onAdClicked(String url) {
                         Log.d(TAG, "onAdClicked");
                     }
 
