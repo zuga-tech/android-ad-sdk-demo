@@ -46,6 +46,14 @@
                 app:textColor="#000"
                 app:textSize="18sp" />
 
+            <net.studymongolian.mongollibrary.MongolTextView
+                android:id="@+id/tv_call_to_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:textColor="#1A81D3"
+                app:textSize="18sp" />
+
         </LinearLayout>
 
         <zuga.com.bainu.ad.sdk.view.AdMediaView
@@ -66,7 +74,6 @@
                 android:layout_height="300dp"
                 android:visibility="gone" />
         </zuga.com.bainu.ad.sdk.view.AdMediaView>
-
 
     </LinearLayout>
 

@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
                         .build());
 
         AdLoader.forLauncherAd(this)
-                .setSilenceTime(10000)
                 .withAdListener(new AdListener() {
                     @Override
                     public void onAdClicked(String url) {
@@ -93,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
                     case viewTypeAd:
                         NativeAdView nativeAdView = (NativeAdView) LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_native_ad, parent, false);
                         nativeAdView.setIconView(nativeAdView.findViewById(R.id.iv_header))
-                                .setCallToActionView(nativeAdView.findViewById(R.id.tv_header))
-                                .setAdvertiserView(null)
+                                .setCallToActionView(nativeAdView.findViewById(R.id.tv_call_to_action))
+                                .setAdvertiserView(nativeAdView.findViewById(R.id.tv_header))
                                 .setBodyView(nativeAdView.findViewById(R.id.tv_body))
                                 .setMediaView(nativeAdView.findViewById(R.id.mv_media));
                         nativeAdView.getMediaView().setImageView(nativeAdView.findViewById(R.id.iv_media));
@@ -127,8 +126,9 @@ public class MainActivity extends AppCompatActivity {
                             nativeAdView.requestLayout();
                         } else {
                             Glide.with(nativeAdView).load(nativeAd.getIcon()).into((ImageView) nativeAdView.getIconView());
-                            ((MongolTextView) nativeAdView.getCallToActionView()).setText(nativeAd.getAdvertiser());
+                            ((MongolTextView) nativeAdView.getCallToActionView()).setText(nativeAd.getCallToAction());
                             ((MongolTextView) nativeAdView.getBodyView()).setText(nativeAd.getBody());
+                            ((MongolTextView) nativeAdView.getAdvertiserView()).setText(nativeAd.getAdvertiser());
                             nativeAdView.getLayoutParams().width = RecyclerView.LayoutParams.WRAP_CONTENT;
                             if (nativeAd.getMediaType() == UnifiedNativeAd.MEDIA_TYPE_IMAGE) {
                                 Glide.with(nativeAdView).load(nativeAd.getMedia()).into((ImageView) nativeAdView.getMediaView().getImageView());
@@ -214,6 +214,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (timelines != null) {
+            return;
+        }
         for (Timeline timeline : timelines) {
             if (timeline.type == Timeline.TYPE_AD) {
                 UnifiedNativeAd content = timeline.getContent(UnifiedNativeAd.class);
