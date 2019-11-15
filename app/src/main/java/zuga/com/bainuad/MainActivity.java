@@ -1,5 +1,6 @@
 package zuga.com.bainuad;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zuga.com.bainu.ad.sdk.AdLoader;
+import zuga.com.bainu.ad.sdk.bean.UnifiedMedia;
 import zuga.com.bainu.ad.sdk.bean.UnifiedNativeAd;
 import zuga.com.bainu.ad.sdk.bean.User;
 import zuga.com.bainu.ad.sdk.listener.AdListener;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(0, 0);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view);
+
         AdLoader.init(getApplication(),
                 "8d09779b-a804-470e-9f54-d5ad7f4941d0",
                 "ccd4f081-1e53-4079-8cff-a9eae9f4692f",
@@ -67,13 +70,14 @@ public class MainActivity extends AppCompatActivity {
                     public void onAdShow() {
                     }
                 }).build().load();
+
         initData();
     }
 
     private void initData() {
         timelines = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
-            if (i % 5 == 0) {
+            if (i % 20 == 0) {
                 String adPositionId = "nativeAdId:" + i;
                 timelines.add(new Timeline(Timeline.TYPE_AD, adPositionId, null));
                 requestAd(i, adPositionId);
@@ -131,12 +135,14 @@ public class MainActivity extends AppCompatActivity {
                             ((MongolTextView) nativeAdView.getAdvertiserView()).setText(nativeAd.getAdvertiser());
                             nativeAdView.getLayoutParams().width = RecyclerView.LayoutParams.WRAP_CONTENT;
                             if (nativeAd.getMediaType() == UnifiedNativeAd.MEDIA_TYPE_IMAGE) {
-                                Glide.with(nativeAdView).load(nativeAd.getMedia()).into((ImageView) nativeAdView.getMediaView().getImageView());
+                                List<UnifiedMedia> medias = nativeAd.getMedias();
+                                String url = medias.get(0).getUrl();
+                                Glide.with(nativeAdView).load(url).into((ImageView) nativeAdView.getMediaView().getImageView());
                                 nativeAdView.getMediaView().getImageView().setVisibility(View.VISIBLE);
                                 nativeAdView.getMediaView().getVideoView().setVisibility(View.GONE);
                             } else {
                                 VideoView videoView = (VideoView) nativeAdView.getMediaView().getVideoView();
-                                videoView.setVideoPath(nativeAd.getMedia());
+                                videoView.setVideoPath(nativeAd.getMedias().get(0).getUrl());
                                 videoView.start();
                                 nativeAdView.getMediaView().getVideoView().setVisibility(View.VISIBLE);
                                 nativeAdView.getMediaView().getImageView().setVisibility(View.GONE);
@@ -175,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 .withNativeAdListener(new NativeAdListener() {
                     @Override
                     public void onNativeAdLoaded(UnifiedNativeAd nativeAd) {
+                        Log.d(TAG, "onNativeAdLoaded: " + nativeAd);
                         Timeline timeline = timelines.get(position);
                         UnifiedNativeAd content = timeline.getContent(UnifiedNativeAd.class);
                         if (content != null) {
@@ -184,8 +191,8 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onMediaViewClick(View mediaView, UnifiedNativeAd nativeAd) {
-                        Log.d(TAG, "onMediaViewClick");
+                    public void onMediaViewClick(View mediaView, Point clickedPosition, UnifiedNativeAd nativeAd) {
+                        Log.d(TAG, "onMediaViewClick: " + clickedPosition);
                     }
                 })
                 .withAdListener(new AdListener() {

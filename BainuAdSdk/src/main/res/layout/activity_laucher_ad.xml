@@ -28,7 +28,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:background="@null"
-        android:src="@drawable/icon_ad_close"
+        android:src="@drawable/bainu_ad_close"
         android:visibility="gone"
         tools:ignore="ContentDescription,RtlHardcoded" />
 
